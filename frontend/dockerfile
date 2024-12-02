@@ -1,0 +1,44 @@
+# Dockerfile for React Frontend
+FROM node:16
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy application code
+COPY . .
+
+# Build the React app
+RUN npm run build
+
+# Expose the port the React app serves on
+EXPOSE 3000# Dockerfile for React Frontend
+FROM node:16
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies with --legacy-peer-deps
+RUN npm install --legacy-peer-deps
+
+# Copy application code
+COPY . .
+
+# Build the React app
+RUN npm run build
+
+# Expose the port the React app serves on
+EXPOSE 3000
+
+# Command to start the React app
+CMD ["npx", "serve", "-s", "build"]
+
+
+# Command to start the React app
+CMD ["npx", "serve", "-s", "build"]
