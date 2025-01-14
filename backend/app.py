@@ -22,7 +22,7 @@ def predict_disease():
     symptoms_input = data.get('symptoms', '')
 
     # Validate language
-    if user_language not in ['english', 'french', 'arabic', 'عربي']:
+    if user_language not in ['english', 'french', 'arabic','عربي']:
         user_language = 'english'
     
     if user_language == 'عربي':

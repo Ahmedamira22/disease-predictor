@@ -1,44 +1,21 @@
-# Dockerfile for React Frontend
-FROM node:16
+# Use the official Node.js image as the base image
+FROM node:18-alpine
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy application code
-COPY . .
-
-# Build the React app
-RUN npm run build
-
-# Expose the port the React app serves on
-EXPOSE 3000# Dockerfile for React Frontend
-FROM node:16
-
-# Set working directory
-WORKDIR /app
-
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json (if available) to the working directory
 COPY package*.json ./
 
-# Install dependencies with --legacy-peer-deps
-RUN npm install --legacy-peer-deps
+# Install dependencies including react-scripts
+RUN npm install --legacy-peer-deps react-scripts
 
-# Copy application code
+# Copy the entire project to the working directory
 COPY . .
 
-# Build the React app
-RUN npm run build
-
-# Expose the port the React app serves on
+# Expose the port the app will run on
 EXPOSE 3000
 
-# Command to start the React app
-CMD ["npx", "serve", "-s", "build"]
-
-
-# Command to start the React app
-CMD ["npx", "serve", "-s", "build"]
+# Start the React development server
+# Add HOST=0.0.0.0 to make it accessible from outside the container
+CMD ["npm", "start"]
